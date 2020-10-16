@@ -1,38 +1,102 @@
 .App {
   text-align: center;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.calculadora {
+  width: 20vw;
+  height: auto;
+  display: block;
+  align-items: center;
+  margin-left: 35vw;
+  margin-top: 2vh;
+  justify-content: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.box_botoes{
   display: flex;
-  flex-direction: column;
+}
+.display{
+  width:25.5vw;
+  outline: 0.3vw solid black;
+  overflow-x: scroll;
+  background-color: greenyellow;
+}
+.Input{
+  width: 25.5vw;
+  height: 5vw;
+  background-color: greenyellow;
+  font-size: 3vw;
+  font-weight: bold;
+  display: flex;
+  padding: 0.2vw;
+}
+
+.box_inputs{
+  float: left;
+}
+
+.box_inputs2{
+  float: left;
+}
+
+.linha {
+  width: 20vw;
+  height: auto;
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.Button{
+  width:18vw;
+  height: 7vw;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-weight: lighter;
+  font-size: 7vw;
+  background-color: #b9bcc7;
+  color: rgb(117, 117, 117);
+  outline: 0.2vw solid #888
+  
 }
 
-.App-link {
-  color: #61dafb;
+.botao_AC{
+  width:18vw;
+  height: 7vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: lighter;
+  font-size: 4vw;
+  background-color: orangered;
+  color:white;
+  outline: 0.2vw solid #888
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.botao_div{
+  width:5.6vw;
+  height: 7vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: lighter;
+  font-size: 7vw;
+  background-color: #b9bcc7;
+  color: rgb(117, 117, 117);
+  outline: 0.2vw solid #888
 }
+
+.botao_igual{
+  width:5.6vw;
+  height: 28vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: lighter;
+  font-size: 7vw;
+  background-color: #b9bcc7;
+  color: rgb(117, 117, 117);
+  outline: 0.2vw solid #888
+}
+
