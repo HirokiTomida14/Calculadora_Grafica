@@ -1,100 +1,169 @@
 .App {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
 }
 
 .calculadora {
-  width: 20vw;
-  height: auto;
-  display: block;
+  float: left;
+  width: 30%;
+  height: 90%;
   align-items: center;
-  margin-left: 35vw;
-  margin-top: 2vh;
   justify-content: center;
+  outline: 0.2vw solid black;
+}
+
+.box_memoria{
+  float: left;
+  width: 30%;
+  height: 90%;
+  justify-content: center;
+  background-color: greenyellow;
+  outline: 0.3vw solid black;
+  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 .box_botoes{
   display: flex;
+  width:100%;
+  height: 62.5%;
 }
+
 .display{
-  width:25.5vw;
+  width:100%;
+  height: 25%;
   outline: 0.3vw solid black;
   overflow-x: scroll;
   background-color: greenyellow;
 }
+
 .Input{
-  width: 25.5vw;
-  height: 5vw;
+  width: 100%;
+  height: 50%;
+  vertical-align: center;
   background-color: greenyellow;
-  font-size: 3vw;
+  font-size: 7vh;
   font-weight: bold;
-  display: flex;
-  padding: 0.2vw;
 }
 
 .box_inputs{
   float: left;
+  width:75%;
+  height: 100%;
 }
 
 .box_inputs2{
   float: left;
+  width:25%;
+  height: 100%;
 }
 
 .linha {
-  width: 20vw;
-  height: auto;
+  width: 100%;
+  height: 20%;
   display: inline-flex;
   flex-direction: row;
 }
 
 .Button{
-  width:18vw;
-  height: 7vw;
+  width:33.33333%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: lighter;
-  font-size: 7vw;
+  font-size: 10vh;
   background-color: #b9bcc7;
   color: rgb(117, 117, 117);
-  outline: 0.2vw solid #888
-  
+  outline: 0.2vw solid #888;
 }
 
 .botao_AC{
-  width:18vw;
-  height: 7vw;
+  width:33.333333%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: lighter;
-  font-size: 4vw;
+  font-size: 7vh;
   background-color: orangered;
   color:white;
   outline: 0.2vw solid #888
 }
 
 .botao_div{
-  width:5.6vw;
-  height: 7vw;
+  width:100%;
+  height: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: lighter;
-  font-size: 7vw;
+  font-size: 10vh;
   background-color: #b9bcc7;
   color: rgb(117, 117, 117);
   outline: 0.2vw solid #888
 }
 
 .botao_igual{
-  width:5.6vw;
-  height: 28vw;
+  width:100%;
+  height: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: lighter;
-  font-size: 7vw;
+  font-size: 16vh;
   background-color: #b9bcc7;
   color: rgb(117, 117, 117);
   outline: 0.2vw solid #888
+}
+
+.linha_memoria{
+  width: 100%;
+  height: 12.5%;
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.botao_memoria{
+  width:25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 6vh;
+  background-color:  rgb(101, 123, 247);
+  color:black;
+  outline: 0.2vw solid #888
+}
+
+#titulo_memoria{
+  text-align: center;
+  font-size: 3vw;
+  font-weight: bolder;
+  text-decoration: underline;
+  margin: 0.1vw;
+}
+
+.botao_memoria2{
+  width:100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 5vh;
+  background-color:  rgb(206, 101, 247);
+  color:black;
+  outline: 0.2vw solid #888
+}
+
+.table{
+  font-size: 6vh;
+  text-align: left;
+  font-weight: bold;
 }

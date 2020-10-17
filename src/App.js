@@ -3,6 +3,11 @@ import './App.css';
 
 const Input = props => <div className= "Input">{props.input}</div>;
 const BotaoAC = props => (<div className="botao_AC" onClick={props.handleClear} >{props.children}</div>);
+const BotaoDiv = props => <div className= "botao_div" onClick={() => props.handleClick(props.children)}>{props.children}</div>
+const BotaoIgual = props => <div className= "botao_igual" onClick={() => props.handleClick(props.children)}>{props.children}</div>
+const BotaoMemoria = props => <div className= "botao_memoria" onClick={() => props.handleClick(props.children)}>{props.children}</div>
+const BotaoMemoria2 = props => (<div className="botao_memoria2" onClick={props.handleSet} >{props.children}</div>);
+
 const Operador = val => {
   return !isNaN(val) || val === "," || val === "=";
 };
@@ -17,39 +22,20 @@ const Button = props => (
   </div>
 );
 
-const BotaoDiv = props => (
-  <div
-    className={`botao_div ${
-      Operador(props.children) ? null : "operator"
-    }`}
-    onClick={() => props.handleClick(props.children)}
-  >
-    {props.children}
-  </div>
-);
-
-const BotaoIgual = props => (
-  <div
-    className={`botao_igual ${
-      Operador(props.children) ? null : "operator"
-    }`}
-    onClick={() => props.handleClick(props.children)}
-  >
-    {props.children}
-  </div>
-);
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       input: '',
-      currentOperand: '',
       previousOperand: '',
       operation: '',
       decimal: false,
       resultado: false,
       };
+
+    this.registro = {
+      memoria:[]
+      }
   }
 
   add_input = val => {
@@ -73,7 +59,7 @@ class App extends React.Component {
         this.setState({input: val});
       }
 
-      else if (this.state.previousOperand === ''){
+      else if (this.state.previousOperand === '' && !isNaN(parseFloat(this.state.input))){
           this.setState(state => ({
             previousOperand: this.state.input,
             operation: val,
@@ -110,20 +96,59 @@ class App extends React.Component {
         previousOperand: ''}));
     }
 
-    else if (val !== '=' && this.state.resultado === false){
+    else if (val !== '=' && this.state.resultado === false && val !== 'MC' && val !== 'MR' && val !== 'M+' && val !== 'MS'){
       this.setState(state => ({
-        input: this.state.input + val,
-        currentOperand: this.state.input}));
+        input: this.state.input + val}));
     }
   }
 
+  add_memory = val => {
+    if (val === 'MC') {
+      this.registro.memoria = []
+      this.forceUpdate();
+    }
+
+    else if (val === 'MR') {
+      if(!isNaN(this.registro.memoria[0])){
+        this.setState({
+          input: parseFloat(this.registro.memoria[0])
+        })
+      }
+    }
+
+    else if (!isNaN(parseFloat(this.state.input)) && isFinite(parseFloat(this.state.input))){
+
+      if (val === 'M+') {
+        if (isNaN(parseFloat(this.registro.memoria[0]))){
+          this.setState({
+            registro: this.registro.memoria.unshift(parseFloat(this.state.input))})
+        }
+        else{
+        this.setState({
+          registro: this.registro.memoria.splice(0,1,(parseFloat(this.state.input) + (parseFloat(this.registro.memoria[0])) ))})
+        }
+      }
+
+      else if (val === 'MS') {
+        this.setState({
+          registro: this.registro.memoria.unshift(parseFloat(this.state.input))})
+      }
+   }
+  }
+  
   render() {
     return (
       <div className="App">
-        <div className="calculadora">
+        <span className="calculadora">
           <div className="display">
             <Input input={this.state.previousOperand + this.state.operation }></Input>
             <Input input={this.state.input}></Input>
+          </div>
+          <div className='linha_memoria'>
+                <BotaoMemoria handleClick={this.add_memory}>MC</BotaoMemoria>
+                <BotaoMemoria handleClick={this.add_memory}>MR</BotaoMemoria>
+                <BotaoMemoria handleClick={this.add_memory}>M+</BotaoMemoria>
+                <BotaoMemoria handleClick={this.add_memory}>MS</BotaoMemoria>
           </div>
           <div className='box_botoes'>
             <span className='box_inputs'>
@@ -154,7 +179,7 @@ class App extends React.Component {
               <div className='linha'>
                 <Button handleClick={this.add_input}>0</Button>
                 <Button handleClick={this.add_input}>.</Button>
-                <BotaoAC handleClear={() => this.setState({ input: "", currentOperand: "",  decimal: false, resultado: false})}>AC</BotaoAC>
+                <BotaoAC handleClear={() => this.setState({ input: "", decimal: false, resultado: false})}>AC</BotaoAC>
               </div>
             </span>
 
@@ -163,7 +188,22 @@ class App extends React.Component {
               <BotaoIgual handleClick={this.add_input}>=</BotaoIgual>
             </span>
           </div>
-        </div>
+        </span>
+          
+        <span className='box_memoria'>
+          <h1 id = 'titulo_memoria'>Memória</h1>
+          <table className='table'>
+            {this.registro.memoria.map((numero,idbotao) => {
+              let table = []
+              let children = []
+              children.push(<td><BotaoMemoria2 id={idbotao} handleSet={() => this.setState({input: parseFloat(this.registro.memoria[idbotao])})}>MC</BotaoMemoria2></td>)
+              children.push(<td><BotaoMemoria2 id={idbotao} handleSet={() => this.setState({registro: this.registro.memoria.splice(idbotao,1)})}>MR</BotaoMemoria2></td>)
+              children.push(<td>{numero}</td>) 
+              table.push(<tr>{children}</tr>)
+              return table
+            })}
+          </table>
+        </span>
       </div>
     );
   }
